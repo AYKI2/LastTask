@@ -47,8 +47,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> filterBooksByPublishedYear() {
-        List<Book> book = bookList.stream().sorted(Comparator.comparing(Book::getPublishedYear)).toList();
-        return book;
+        return bookList.stream().sorted(Comparator.comparing(Book::getPublishedYear)).toList();
     }
 
     @Override
@@ -60,6 +59,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book maxPriceBook() {
-        return null;
+        List<Book> books = bookList.stream().max(Comparator.comparing(Book::getPrice)).stream().toList();
+        Book book1 = new Book();
+        for (Book book : books) {
+            book1 = book;
+            break;
+        }
+        return book1;
     }
 }
